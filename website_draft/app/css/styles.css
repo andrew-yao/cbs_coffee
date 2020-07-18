@@ -1,0 +1,20 @@
+body {
+    margin: 0;
+}
+
+nav > ul {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    list-style-type: none;
+    background-color: #dddddd;
+}
+nav,
+nav > ul {
+    margin: 0;
+    padding: 0;
+}
+
+nav > ul > li {
+    margin: 0;
+    padding: 1em;
+}
