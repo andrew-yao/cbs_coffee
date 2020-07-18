@@ -2,12 +2,14 @@ body {
     margin: 0;
 }
 
+/* NAV BAR */
 nav > ul {
     display: grid;
     grid-template-columns: auto auto auto;
     list-style-type: none;
     background-color: #dddddd;
 }
+
 nav,
 nav > ul {
     margin: 0;
@@ -16,5 +18,10 @@ nav > ul {
 
 nav > ul > li {
     margin: 0;
-    padding: 1em;
+    padding: 10px;
+}
+
+/* PAGE CONTENT */
+.pagecontent {
+    margin: 10px;
 }
