@@ -5,7 +5,7 @@ body {
 /* NAV BAR */
 nav > ul {
     display: grid;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: auto auto auto auto;
     list-style-type: none;
     background-color: #dddddd;
 }
@@ -22,17 +22,19 @@ nav > ul > li {
 }
 
 /* PAGE CONTENT */
-.pagecontent {
+div.pagecontent {
     margin: 10px;
 }
 
 /* PRODUCTS */
-.products {
+div.products,
+div.farms {
     display: flex;
     flex-flow: row wrap;
 }
 
-.product {
+div.product,
+div.farm {
     text-align: center;
     background-color: #dddddd;
     padding: 20px;
@@ -40,6 +42,15 @@ nav > ul > li {
     width: 120px;
 }
 
-input[type=number] {
+/* QUANTITIES */
+input.product-quantity {
     width: 30px;
+}
+
+/* TABLES */
+table, 
+th,
+td {
+    border: 1pt solid black;
+    border-collapse: collapse;
 }
