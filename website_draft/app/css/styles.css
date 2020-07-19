@@ -54,3 +54,8 @@ td {
     border: 1pt solid black;
     border-collapse: collapse;
 }
+
+table {
+    min-width: 400px;
+    text-align: left;
+}
