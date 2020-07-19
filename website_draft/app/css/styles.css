@@ -25,3 +25,21 @@ nav > ul > li {
 .pagecontent {
     margin: 10px;
 }
+
+/* PRODUCTS */
+.products {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.product {
+    text-align: center;
+    background-color: #dddddd;
+    padding: 20px;
+    margin: 20px;
+    width: 120px;
+}
+
+input[type=number] {
+    width: 30px;
+}
