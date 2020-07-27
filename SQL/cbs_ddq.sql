@@ -1,3 +1,7 @@
+-- DATA DEFINITION QUERIES
+-- queries to generate CBS database
+
+
 DROP TABLE IF EXISTS cbs_customers;
 
 CREATE TABLE cbs_customers (
@@ -99,7 +103,7 @@ CREATE TABLE cbs_farms (
 LOCK TABLE cbs_farms WRITE;
 INSERT INTO cbs_farms (farm_name, farm_region, farm_country)
 VALUES
-('Main Street Coffee Farm', 'Central America', 'US'),
+('Main Street Coffee Farm', 'Central America', 'Guatemala'),
 ('La Granja de Café de La Gente', 'South America', 'Peru'),
 ('La Fattoria di Roma', 'Europe', 'Italy');
 UNLOCK TABLES;
