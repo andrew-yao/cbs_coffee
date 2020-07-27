@@ -34,17 +34,14 @@
             </ul>
         </div>
     </nav>
-        
+
 
     <div class="container mx-2">
-        <div>
-            <h1 class="bd-title py-4">Our Products</h1>
-        </div>
-
-
-        <table class="table">   
+        <h1 class="bd-title py-4">Our Products</h1>
+  
+        <table class="table">
             <tr>
-                <th></th>
+                
                 <th>Product ID</th>
                 <th>Name</th>
                 <th>Description</th>
@@ -53,41 +50,9 @@
                 <th>Price</th>
                 <th>Stock</th>
                 <th></th>
-                <th></th>
             </tr>
             <tr>
-                <th>Search:</th>
-                <td>
-                    <input type="text" id="search_productID" placeholder="1">
-                </td>
-                <td>
-                    <input type="text" id="search_prodcutName" placeholder="Name">
-                </td>
-                <td>
-                    --
-                </td>
-                <td>
-                    <input type="text" id="search_productRoast" placeholder="Roast">
-                </td>
-                <td>
-                    <input type="text" id="search_productWeight" placeholder="Weight">
-                </td>
-                <td>
-                    <input type="text" id="search_productPrice" placeholder="Price">
-                </td>
-                <td>
-                    <input type="text" id="search_productStock" placeholder="Stock">
-                </td>
-                <td>
-                    <button class="btn btn-sm btn-primary btn-block" id="searchProducts" type="button">Search</button>
-                </td>
-                <td>
-                    <button class="btn btn-sm btn-primary btn-block" id="allProdcuts" type="button">All</button>
-                </td>
-            </tr>
-            
-            <tr>
-                <th>Results:</th>
+                
                 <td>[ID]</td>
                 <td>[name]</td>
                 <td>[description]</td>
@@ -95,49 +60,64 @@
                 <td>[weight]</td>
                 <td>[$]</td>
                 <td>[stock]</td>
-                <td>
-                    <button class="btn btn-primary btn-sm btn-block" id="editProduct" type="button">Edit</button>
-                </td>
+                
                 <td>
                     <button class="btn btn-primary btn-sm btn-block" id="deleteProduct" type="button">Delete</button>
-                </td>    
-            </tr>
-            
-            <tr>
-                <th>Add:</th>
-                <td>
-                    <input type="text" >
-                </td>
-                <td>
-                    <input type="text" >
-                </td>
-                <td>
-                    <input type="text" >
-                </td>
-                <td>
-                    <input type="text" >
-                </td>
-                <td>
-                    <input type="text" >
-                </td>
-                <td>
-                    <input type="text" >
-                </td>
-                <td>
-                    <input type="text" >
-                </td>
-                <td colspan="2">
-                    <button class="btn btn-primary btn-sm btn-block" type="button">Add</button>
                 </td>
             </tr>
-
         </table>
+
+        <h3 class="bd-title py-4">Products and Farms</h3>
+  
+        <table class="table table-bordered">
+            <tr>
+                <th>Product ID</th>
+                <th>Farm ID</th>
+            </tr>
+            <tr>
+                <td>[1]</td>
+                <td>[1]</td>
+            </tr>
+            <tr>
+                <td>[1]</td>
+                <td>[2]</td>
+            </tr>
+        </table>
+
+
+        <br><br>
+        <h3 class="bd-title py-4">Add New Product</h3>
+        <form action="" method="POST">
+            <label for="">Name:</label>
+            <input type="text" />
+            <br>
+            <label for="">Description:</label>
+            <input type="text" />
+            <br>
+            <label for="">Roast:</label>
+            <input type="text"/>
+            <br>
+            <label for="">Weight:</label>
+            <input type="" />
+            <br>
+            <label for="">Price:</label>
+            <input type="" />
+            <br>
+            <label for="">Stock:</label>
+            <input type="" />
+            <br>
+            <label for="">Farm ID(s):</label>
+            <input type="" />
+            <br>
+            <button type="submit" class="btn btn-primary">Add</button>
+        </form>
+
 
         <!-- FOOTER -->
         <footer class="my-5 pt-5 text-muted text-center text-small">
             <p class="mb-1">&copy; 2020 CBS</p>
         </footer>
-        
+
     </div>
 
 
