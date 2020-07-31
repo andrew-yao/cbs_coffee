@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CBS Admin Products</title>
+    <title>CBS Admin Customers</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 </head>
 <body>
@@ -15,14 +15,14 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" title="Products" href="products.html">Products<span class="sr-only">(current)</span></a>
+                <li class="nav-item">
+                    <a class="nav-link" title="Products" href="products.html">Products</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" title="Farms" href="farms.html">Farms</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" title="Customers" href="customers.html">Customers</a>
+                <li class="nav-item active">
+                    <a class="nav-link" title="Customers" href="customers.html">Customers<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" title="Orders" href="orders.html">Orders</a>
@@ -31,110 +31,117 @@
         </div>
     </nav>
 
-    <div class="container mx-2">
-        <h2 class="bd-title py-4">Our Products</h2>
 
+
+    <div class="container mx-2">
+
+
+        <h2 class="bd-title mt-5 py-4">Search Customers By Name</h2>
+        <form action="" method="POST">
+            <div class="form-inline mb-3">
+                <label for="">First Name:</label>
+                <input type="text" class="form-control mx-2" />
+                <label for="">Last Name:</label>
+                <input type=""  class="form-control  mx-2"/>
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" type="button">Search</button>
+                </span>
+            </div>    
+        </form>
+
+        <h2 class="bd-title py-4">Search Results</h2>
         <table class="table table-bordered">
             <tr>
-                <th>Product ID</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Roast</th>
-                <th>Weight</th>
-                <th>Price</th>
-                <th>Stock</th>
+                <th>Customer ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>ZIP</th>
+                <th>Phone</th>
             </tr>
             <tr>
                 <td>[ID]</td>
-                <td>[name]</td>
-                <td>[description]</td>
-                <td>[roast]</td>
-                <td>[weight]</td>
-                <td>[$]</td>
-                <td>[stock]</td>
+                <td>[firstname]</td>
+                <td>[lastname]</td>
+                <td>[address]</td>
+                <td>[city]</td>
+                <td>[zip]</td>
+                <td>[phone]</td>
             </tr>
         </table>
 
-        <h2 class="bd-title mt-5 py-4">Products and Farms</h2>
+
+
+
+        <h2 class="bd-title py-4">All Customers</h2>
+
         <table class="table table-bordered">
             <tr>
-                <th>Product ID</th>
-                <th>Farm ID</th>
+                <th>Customer ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>ZIP</th>
+                <th>Phone</th>
             </tr>
             <tr>
-                <td>[1]</td>
-                <td>[1]</td>
-            </tr>
-            <tr>
-                <td>[1]</td>
-                <td>[2]</td>
+                <td>[ID]</td>
+                <td>[firstname]</td>
+                <td>[lastname]</td>
+                <td>[address]</td>
+                <td>[city]</td>
+                <td>[zip]</td>
+                <td>[phone]</td>
             </tr>
         </table>
 
-        <h2 class="bd-title mt-5 py-4">Delete A Product</h2>
+        <h2 class="bd-title mt-5 py-4">Delete A Customer</h2>
         <form action="" method="" class="form-inline">
             <label for="">ID:</label>
             <input type="text" class="form-control  mx-2" />
-            <button class="btn btn-primary">Delete Product</button>
+            <button class="btn btn-primary">Delete Customer</button>
         </form>
 
-        <h2 class="bd-title mt-5 py-4">Add A New Product</h2>
+        <h2 class="bd-title mt-5 py-4">Add A New Customer</h2>
         <form action="" method="POST">
             <div class="row">
-                <div class="col-md-12">
-                    <label for="">Name:</label>
+                <div class="col-md-6">
+                    <label for="">First Name:</label>
                     <input type="text" class="form-control" />
+                </div>
+                <div class="col-md-6">
+                    <label for="">Last Name:</label>
+                    <input type=""  class="form-control"/>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <label for="">Description:</label>
-                    <input type="text"  class="form-control"/>            
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <label for="">Roast:</label>
-                    <input type="text" class="form-control" />
+                    <label for="">Address:</label>
+                    <input type=""  class="form-control"/>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-4">
-                    <label for="">Weight:</label>
-                    <input type="" class="form-control" />
-                </div>
-                <div class="col-md-4">
-                    <label for="">Price:</label>
+                    <label for="">City:</label>
                     <input type=""  class="form-control"/>
                 </div>
                 <div class="col-md-4">
-                    <label for="">Stock:</label>
+                    <label for="">ZIP:</label>
+                    <input type=""  class="form-control"/>
+                </div>
+                <div class="col-md-4">
+                    <label for="">Phone:</label>
                     <input type=""  class="form-control"/>
                 </div>
             </div>
             <br>
             <div class="text-center">
-                <button type="submit" class="btn btn-primary btn-lg">Add Product</button>
+                <button type="submit" class="btn btn-primary btn-lg">Add Customer</button>
             </div>
         </form>
 
-        <h2 class="bd-title mt-5 py-4">Add Product's Farm(s)</h2>
-        <form action="" method="">
-            <div class="row">
-                <div class="col-md-6">
-                    <label for="">Product ID:</label>
-                    <input type=""  class="form-control"/>
-                </div>
-                <div class="col-md-6">
-                    <label for="">Farm ID:</label>
-                    <input type=""  class="form-control"/>
-                </div>
-            </div>
-            <br>
-            <div class="text-center">
-                <button type="submit" class="btn btn-primary btn-lg">Add Farm To Product</button>
-            </div>
-        </form>
 
         <!-- FOOTER -->
         <footer class="my-5 pt-5 text-muted text-center text-small">
