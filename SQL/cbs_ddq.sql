@@ -12,7 +12,7 @@ CREATE TABLE cbs_customers (
     customer_city 		VARCHAR(25) 	NOT NULL,
     customer_zip		CHAR(10) 		NOT NULL,
     customer_phone		VARCHAR(25) 	NOT NULL
-);
+) ENGINE=InnoDB;
 
 LOCK TABLES cbs_customers WRITE;
 INSERT INTO cbs_customers (customer_firstname, customer_lastname, customer_address, customer_city, customer_zip, customer_phone)
@@ -39,8 +39,9 @@ CREATE TABLE cbs_orders (
     order_shipcost		DEC(15, 2) 	NOT NULL,
     order_totalcost		DEC(15, 2) 	NOT NULL,
     order_quantity		INT		 	NOT NULL,
-	CONSTRAINT cbs_orders_ibfk_1 FOREIGN KEY (customer_id) REFERENCES cbs_customers (customer_id)
-);
+	CONSTRAINT cbs_orders_ibfk_1 FOREIGN KEY (customer_id) REFERENCES cbs_customers (customer_id) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB;
+
 
 LOCK TABLES cbs_orders WRITE;
 INSERT INTO cbs_orders (order_date, customer_id, ship_firstname, ship_lastname, ship_address, ship_city, ship_zip, ship_phone, order_subtotal, order_shipcost, order_totalcost, order_quantity)
@@ -73,12 +74,13 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS cbs_orderdetails;
 
 CREATE TABLE cbs_orderdetails (
-	order_id			INT			NOT NULL DEFAULT '0',
-    product_id			INT			NOT NULL DEFAULT '0',
-    product_quantity	INT			NOT NULL DEFAULT '0',
-    CONSTRAINT cbs_orderdetails_ibfk_1 FOREIGN KEY (order_id) REFERENCES cbs_orders (order_id),
-    CONSTRAINT cbs_orderdetails_ibfk_2 FOREIGN KEY (product_id) REFERENCES cbs_products (product_id)
-);
+	order_id			INT,
+    product_id			INT,
+    product_quantity	INT,
+    CONSTRAINT cbs_orderdetails_ibfk_1 FOREIGN KEY (order_id) REFERENCES cbs_orders(order_id) ON DELETE SET NULL ON UPDATE CASCADE,
+    CONSTRAINT cbs_orderdetails_ibfk_2 FOREIGN KEY (product_id) REFERENCES cbs_products(product_id) ON DELETE SET NULL ON UPDATE CASCADE
+)ENGINE=InnoDB;
+
 
 -- TODO: think about how to set a 'constraint' to limit what product_quantity can be added corresponding to cbs_products.product_stock
 -- it should reject if product_quantity being inserted is greater than cbs_products.product_stock
@@ -98,7 +100,7 @@ CREATE TABLE cbs_farms (
     farm_name			VARCHAR(50) 	NOT NULL,
     farm_region			VARCHAR(25) 	NOT NULL,
     farm_country		VARCHAR(25) 	NOT NULL
-);
+)ENGINE=InnoDB;
 
 LOCK TABLE cbs_farms WRITE;
 INSERT INTO cbs_farms (farm_name, farm_region, farm_country)
@@ -111,11 +113,12 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS cbs_products_farms;
 
 CREATE TABLE cbs_products_farms (
-    product_id			INT 	NOT NULL DEFAULT '0',
-	farm_id				INT		NOT NULL DEFAULT '0',
-	CONSTRAINT cbs_products_farms_ibfk_1 FOREIGN KEY (product_id) REFERENCES cbs_products (product_id),
-    CONSTRAINT cbs_products_farms_ibfk_2 FOREIGN KEY (farm_id) REFERENCES cbs_farms (farm_id)
-);
+    product_id			INT,
+	farm_id				INT,
+    CONSTRAINT cbs_products_farms_ibfk_1 FOREIGN KEY (product_id) REFERENCES cbs_products(product_id) ON DELETE SET NULL ON UPDATE CASCADE,
+    CONSTRAINT cbs_products_farms_ibfk_2 FOREIGN KEY (farm_id) REFERENCES cbs_farms(farm_id) ON DELETE SET NULL ON UPDATE CASCADE
+)ENGINE=InnoDB;
+
 
 LOCK TABLE cbs_products_farms WRITE;
 INSERT INTO cbs_products_farms (product_id, farm_id)
