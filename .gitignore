@@ -1,5 +1,5 @@
-app/db/config.js
+cbs/db/config.js
 
 node_modules
-app/node_modules
+cbs/node_modules
 db/node_modules
