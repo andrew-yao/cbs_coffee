@@ -16,5 +16,13 @@
     "mysql": "^2.18.1"
   },
   "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jordanpemberton/cbs_coffee.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jordanpemberton/cbs_coffee/issues"
+  },
+  "homepage": "https://github.com/jordanpemberton/cbs_coffee#readme",
   "description": ""
 }
