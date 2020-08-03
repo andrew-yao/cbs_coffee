@@ -1,3 +1,5 @@
 node_modules
 cbs/node_modules
 db/node_modules
+
+cbs/db/config_ignore.js

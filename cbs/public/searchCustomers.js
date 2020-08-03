@@ -1,5 +1,5 @@
 function getCustomersByName(){
-    var searchFirstNameInput = document.getElementById('searchFirstNameInput').value;
+    var searchFName = document.getElementById('search-fname').value;
     //construct the URL and redirect to it
-    window.location = '/people/search/' + encodeURI(searchFirstNameInput);
+    window.location = '/people/search/' + encodeURI(searchFName);
 }
