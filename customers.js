@@ -2,6 +2,7 @@ module.exports = function () {
     var express = require('express');
     var router = express.Router();
 
+    // Get all customers:
     function getCustomers(res, mysql, context, complete) {
         sql = "SELECT customer_id AS id, customer_firstname, customer_lastname, customer_address, customer_city, customer_zip, customer_phone FROM cbs_customers"
         mysql.pool.query(sql, function (error, results, fields) {
@@ -14,7 +15,7 @@ module.exports = function () {
         });
     }
 
-    // gets one specific customer to update it
+    // Get one specific customer to update it:
     function getCustomer(res, mysql, context, id, complete) {
         var sql = "SELECT customer_id AS id, customer_firstname, customer_lastname, customer_address, customer_city, customer_zip, customer_phone FROM cbs_customers WHERE customer_id = ?";
         var inserts = [id];
@@ -28,7 +29,7 @@ module.exports = function () {
         });
     }
 
-    // displays all the customers
+    // Display all the customers:
     router.get('/', function (req, res) {
         var callbackCount = 0;
         var context = {};
@@ -45,7 +46,7 @@ module.exports = function () {
         }
     });
 
-        // retrieves one specific customer to UPDATE
+        // Retrieves one specific customer to UPDATE:
         router.get('/:id', function (req, res) {
             callbackCount = 0;
             var context = {};
@@ -77,6 +78,7 @@ module.exports = function () {
         });
     });
 
+    // To update a customer:
     router.put('/:id', function (req, res) {
         var mysql = req.app.get('mysql');
         console.log(req.body)
