@@ -79,7 +79,6 @@ module.exports = function () {
 
     router.put('/:id', function (req, res) {
         var mysql = req.app.get('mysql');
-        console.log("I'm in PUT");      // DELETE THIS
         console.log(req.body)
         console.log(req.params.id)
         var sql = "UPDATE cbs_customers SET customer_firstname=?, customer_lastname=?, customer_address=?, customer_city=?, customer_zip=?, customer_phone=? WHERE customer_id=?";
