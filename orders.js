@@ -122,6 +122,7 @@ module.exports = function(){
         var inserts = [req.params.id];
         sql = mysql.pool.query(sql, inserts, function(error, results, fields){
             if(error){
+                console.log(error)
                 res.write(JSON.stringify(error));
                 res.status(400); 
                 res.end(); 
