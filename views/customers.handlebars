@@ -39,47 +39,12 @@
 
     <div class="container mx-2">
 
-
-        <h2 class="bd-title mt-5 py-4">Search Customers By Name</h2>
-        <form action="" method="">
-            <div class="form-inline mb-3">
-                <label for="search-fname">First Name:</label>
-                <input type="text" id="search-fname" class="form-control mx-2" />
-                <label for="">Last Name:</label>
-                <input type="" class="form-control  mx-2"/>
-                <span class="input-group-btn">
-                    <button class="btn btn-primary" onclick="getCustomersByName()">Search</button>
-                    {{!-- <button type="submit" class="btn btn-primary">Search</button>                     --}}
-                </span>
-            </div>
+        <h2 class="bd-title mt-5 py-4">Search Customers by First Name</h2>
+        <form id='search_people' action='' method=''>
+            <label> Customer First Name:</label>
+            <input id='customer_firstname_search' type='text' name='customer_firstname_search' value=''>
+            <input type="button" value="Search" onclick="searchCustomersFirstName()">
         </form>
-
-        <h2 class="bd-title py-4">Search Results</h2>
-        <table class="table table-bordered">
-            <tr>
-                <th>Customer ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Address</th>
-                <th>City</th>
-                <th>ZIP</th>
-                <th>Phone</th>
-            </tr>
-            {{#each searchresults}}
-                <tr>
-                    <td>{{customer_id}}</td>
-                    <td>{{customer_firstname}}</td>
-                    <td>{{customer_lastname}}</td>
-                    <td>{{customer_address}}</td>
-                    <td>{{customer_city}}</td>
-                    <td>{{customer_zip}}</td>
-                    <td>{{customer_phone}}</td>
-                </tr>
-            {{/each}}
-        </table>
-
-
-
 
         <h2 class="bd-title py-4">All Customers</h2>
 
