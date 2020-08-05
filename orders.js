@@ -63,7 +63,7 @@ module.exports = function(){
     });
 
 
-    // Retrieves one specific farm to UPDATE:
+    // Retrieves one specific order to UPDATE:
     router.get('/:id', function (req, res) {
         callbackCount = 0;
         var context = {};
@@ -81,8 +81,8 @@ module.exports = function(){
     // to INSERT an order:
     router.post('/', function (req, res) {
         var mysql = req.app.get('mysql');
-        var sql = "INSERT INTO cbs_orders (customer_id, order_date, ship_firstname, ship_lastname, ship_address, ship_city, ship_zip, ship_phone) VALUES (?,?,?,?,?,?,?,?)";
-        var inserts = [req.body.customer_id, req.body.order_date, req.body.ship_firstname, req.body.ship_lastname, req.body.ship_address, req.body.ship_city, req.body.ship_zip, req.body.ship_phone];
+        var sql = "INSERT INTO cbs_orders (order_date, customer_id, ship_firstname, ship_lastname, ship_address, ship_city, ship_zip, ship_phone, order_subtotal, order_shipcost, order_totalcost, order_quantity) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+        var inserts = [req.body.order_date, req.body.customer_id, req.body.ship_firstname, req.body.ship_lastname, req.body.ship_address, req.body.ship_city, req.body.ship_zip, req.body.ship_phone, req.body.order_subtotal, req.body.order_shipcost, req.body.order_totalcost, req.body.order_quantity];
         sql = mysql.pool.query(sql, inserts, function (error, results, fields) {
             if (error) {
                 console.log(JSON.stringify(error))
@@ -100,8 +100,8 @@ module.exports = function(){
         var mysql = req.app.get('mysql');
         console.log(req.body)
         console.log(req.params.id)
-        var sql = "UPDATE cbs_orders SET customer_id=?, ship_firstname=?, ship_lastname=?, ship_address=?, ship_city=?, ship_zip=?, ship_phone=? WHERE order_id=?"
-        var inserts = [req.body.customer_id, req.body.ship_firstname, req.body.ship_lastname, req.body.ship_address, req.body.ship_city, req.body.ship_zip, req.body.ship_phone, req.params.id];
+        var sql = "UPDATE cbs_orders SET order_date=?, ship_date=?, customer_id=?, ship_firstname=?, ship_lastname=?, ship_address=?, ship_city=?, ship_zip=?, ship_phone=? WHERE order_id=?"
+        var inserts = [req.body.order_date, req.body.ship_date, req.body.customer_id, req.body.ship_firstname, req.body.ship_lastname, req.body.ship_address, req.body.ship_city, req.body.ship_zip, req.body.ship_phone, req.params.id];
         sql = mysql.pool.query(sql, inserts, function (error, results, fields) {
             if (error) {
                 console.log(error)
@@ -115,7 +115,7 @@ module.exports = function(){
     });
 
 
-    // DELETE:
+    // to DELETE an order
     router.delete('/:id', function(req, res){
         var mysql = req.app.get('mysql');
         var sql = "DELETE FROM cbs_orders WHERE order_id = ?";
