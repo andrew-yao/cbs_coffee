@@ -29,8 +29,7 @@
                     <a class="nav-link" title="Customers" href="/customers">Customers</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" title="Orders" href="/orders">Orders<span
-                            class="sr-only">(current)</span></a>
+                    <a class="nav-link" title="Orders" href="/orders">Orders<span class="sr-only">(current)</span></a>
                 </li>
             </ul>
         </div>
@@ -42,11 +41,15 @@
             <div class="row">
                 <div class="col-md-6">
                     <label for="order_date">Order Date:</label>
-                    <input type="date" name="order_date" class="form-control" value="{{order.order_date}}"/>
+                    <input type="date" name="order_date" class="form-control" value="{{order.order_date}}" />
+                </div>
+                <div class="col-md-6">
+                    <label for="ship_date">Ship Date:</label>
+                    <input type="date" name="ship_date" class="form-control" />
                 </div>
                 <div class="col-md-6">
                     <label for="customer_id">Customer ID:</label>
-                    <input type="number" name="customer_id" class="form-control" value="{{order.customer_id}}"/>
+                    <input type="number" name="customer_id" class="form-control" value="{{order.customer_id}}" />
                 </div>
             </div>
             <div class="row">
@@ -57,32 +60,33 @@
             <div class="row">
                 <div class="col-md-6">
                     <label for="ship_firstname">First Name:</label>
-                    <input type="text" name="ship_firstname" class="form-control" value="{{order.ship_firstname}}"/>
+                    <input type="text" name="ship_firstname" class="form-control" value="{{order.ship_firstname}}" />
                 </div>
                 <div class="col-md-6">
                     <label for="ship_lastname">Last Name:</label>
-                    <input type="text" name="ship_lastname" class="form-control" value="{{order.ship_lastname}}"/>
+                    <input type="text" name="ship_lastname" class="form-control" value="{{order.ship_lastname}}" />
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-md-12">
                     <label for="ship_address">Address:</label>
-                    <input type="text" name="ship_address" class="form-control" value="{{order.ship_address}}"/>
+                    <input type="text" name="ship_address" class="form-control" value="{{order.ship_address}}" />
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-5">
                     <label for="ship_city">City:</label>
-                    <input type="text" id="ship_city" name="ship_city" class="form-control" value="{{order.ship_city}}"/>
+                    <input type="text" id="ship_city" name="ship_city" class="form-control"
+                        value="{{order.ship_city}}" />
                 </div>
                 <div class="col-md-3">
                     <label for="ship_zip">ZIP:</label>
-                    <input type="text" id="ship_zip" name="ship_zip" class="form-control" value="{{order.ship_zip}}"/>
+                    <input type="text" id="ship_zip" name="ship_zip" class="form-control" value="{{order.ship_zip}}" />
                 </div>
                 <div class="col-md-4">
                     <label for="ship_phone">Phone:</label>
-                    <input type="text" name="ship_phone" class="form-control" value="{{order.ship_phone}}"/>
+                    <input type="text" name="ship_phone" class="form-control" value="{{order.ship_phone}}" />
                 </div>
             </div>
             <br>
