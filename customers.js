@@ -28,14 +28,28 @@ module.exports = function () {
         });
     }
 
-    // displays all the customers
+    // Find customers of the same first name
+    function searchCustomersFirstName(req, res, mysql, context, complete) {
+        //sanitize the input as well as include the % character
+        var query = "SELECT customer_id AS id, customer_firstname, customer_lastname, customer_address, customer_city, customer_zip, customer_phone FROM cbs_customers WHERE customer_firstname LIKE " + mysql.pool.escape(req.params.s);
+        console.log(query)
+        mysql.pool.query(query, function (error, results, fields) {
+            if (error) {
+                res.write(JSON.stringify(error));
+                res.end();
+            }
+            context.customers = results;
+            complete();
+        });
+    }
+
+    // Display all the customers:
     router.get('/', function (req, res) {
         var callbackCount = 0;
         var context = {};
-        context.jsscripts = ["deleteCustomer.js"];
+        context.jsscripts = ["deleteCustomer.js", "searchCustomers.js"];
         var mysql = req.app.get('mysql');
         var handlebars_file = 'customers'
-
         getCustomers(res, mysql, context, complete);
         function complete() {
             callbackCount++;
@@ -45,21 +59,36 @@ module.exports = function () {
         }
     });
 
-        // retrieves one specific customer to UPDATE
-        router.get('/:id', function (req, res) {
-            callbackCount = 0;
-            var context = {};
-            context.jsscripts = ["updateCustomer.js"];
-            var mysql = req.app.get('mysql');
-            getCustomer(res, mysql, context, req.params.id, complete);
-            function complete() {
-                callbackCount++;
-                if (callbackCount >= 1) {
-                    res.render('update-customer', context);
-                }
-    
+    // retrieves customers with same first name
+    router.get('/search/:s', function (req, res) {
+        var callbackCount = 0;
+        var context = {};
+        context.jsscripts = ["deleteCustomer.js", "searchCustomers.js"];
+        var mysql = req.app.get('mysql');
+        searchCustomersFirstName(req, res, mysql, context, complete);
+        function complete() {
+            callbackCount++;
+            if (callbackCount >= 1) {
+                res.render('search-customer', context);
             }
-        });
+        }
+    });
+
+    // retrieves one specific customer to UPDATE
+    router.get('/:id', function (req, res) {
+        callbackCount = 0;
+        var context = {};
+        context.jsscripts = ["updateCustomer.js"];
+        var mysql = req.app.get('mysql');
+        getCustomer(res, mysql, context, req.params.id, complete);
+        function complete() {
+            callbackCount++;
+            if (callbackCount >= 1) {
+                res.render('update-customer', context);
+            }
+
+        }
+    });
 
     // to INSERT a customer
     router.post('/', function (req, res) {
@@ -79,7 +108,6 @@ module.exports = function () {
 
     router.put('/:id', function (req, res) {
         var mysql = req.app.get('mysql');
-        console.log("I'm in PUT");      // DELETE THIS
         console.log(req.body)
         console.log(req.params.id)
         var sql = "UPDATE cbs_customers SET customer_firstname=?, customer_lastname=?, customer_address=?, customer_city=?, customer_zip=?, customer_phone=? WHERE customer_id=?";
@@ -109,7 +137,7 @@ module.exports = function () {
                 res.status(202).end();
             }
         })
-    });
+    })
 
     return router;
 }();
