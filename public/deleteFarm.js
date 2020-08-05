@@ -1,4 +1,4 @@
-function deleteProduct(id){
+function deleteFarm(id){
     $.ajax({
         url: '/farms/' + id,
         type: 'DELETE',

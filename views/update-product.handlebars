@@ -4,13 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CBS Products</title>
+    <title>CBS Update Product</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 </head>
 
 <body>
-
     <div class="container mx-2">
         <h2 class="bd-title mt-5 py-4">Update {{product.product_name}}</h2>
         <form id="update-product" action="/products">
@@ -54,7 +53,7 @@
             </div>
             <br>
             <div class="text-center">
-                <button onclick="updateProduct({{product.id}})">Update</button>
+                <button onclick="updateProduct({{product.id}})" class="btn btn-primary btn-lg">Update</button>
             </div>
         </form>
 

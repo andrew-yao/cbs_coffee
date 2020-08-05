@@ -103,8 +103,8 @@
                     <td>{{customer_city}}</td>
                     <td>{{customer_zip}}</td>
                     <td>{{customer_phone}}</td>
-                    <td><button onclick="deleteCustomer({{id}})">Delete</button></td>
-                    <td><a href="/customers/{{id}}">Update</a></td>
+                    <td><button onclick="deleteCustomer({{id}})" class="btn btn-danger">Delete</button></td>
+                    <td><a href="/customers/{{id}}" class="btn btn-primary">Update</a></td>
                 </tr>
                 {{/each}}
             </tbody>
@@ -149,7 +149,7 @@
             </div>
         </form>
 
-
+ 
         <!-- FOOTER -->
         <footer class="my-5 pt-5 text-muted text-center text-small">
             <p class="mb-1">&copy; 2020 CBS</p>

@@ -46,21 +46,20 @@ module.exports = function () {
         }
     });
 
-        // Retrieves one specific customer to UPDATE:
-        router.get('/:id', function (req, res) {
-            callbackCount = 0;
-            var context = {};
-            context.jsscripts = ["updateCustomer.js"];
-            var mysql = req.app.get('mysql');
-            getCustomer(res, mysql, context, req.params.id, complete);
-            function complete() {
-                callbackCount++;
-                if (callbackCount >= 1) {
-                    res.render('update-customer', context);
-                }
-    
+    // Retrieves one specific customer to UPDATE:
+    router.get('/:id', function (req, res) {
+        callbackCount = 0;
+        var context = {};
+        context.jsscripts = ["updateCustomer.js"];
+        var mysql = req.app.get('mysql');
+        getCustomer(res, mysql, context, req.params.id, complete);
+        function complete() {
+            callbackCount++;
+            if (callbackCount >= 1) {
+                res.render('update-customer', context);
             }
-        });
+        }
+    });
 
     // to INSERT a customer
     router.post('/', function (req, res) {
@@ -111,6 +110,6 @@ module.exports = function () {
             }
         })
     });
-
+ 
     return router;
 }();

@@ -2,7 +2,7 @@ module.exports = function () {
     var express = require('express');
     var router = express.Router();
 
-    // show all existing products
+    // Show all existing products
     function getProducts(res, mysql, context, complete) {
         sql = "SELECT product_id AS id, product_name, product_description, product_roast, product_weight, product_price, product_stock FROM cbs_products"
         mysql.pool.query(sql, function (error, results, fields) {
@@ -14,6 +14,21 @@ module.exports = function () {
             complete();
         });
     }
+
+    // Show all existing entries in Products-Farms table:
+    function getProductsFarms(res, mysql, context, complete) {
+        sql = "SELECT product_id, farm_id FROM cbs_products_farms";
+        mysql.pool.query(sql, function (error, results, fields) {
+            if (error) {
+                res.write(JSON.stringify(error));
+                res.end()
+            }
+            context.productsfarms = results
+            complete();
+        });
+    }
+    
+
 
     // gets one specific product to update it
     function getProduct(res, mysql, context, id, complete) {
@@ -35,11 +50,12 @@ module.exports = function () {
         var context = {};
         context.jsscripts = ["deleteProduct.js"];
         var mysql = req.app.get('mysql');
-        var handlebars_file = 'products'
+        var handlebars_file = 'products';
         getProducts(res, mysql, context, complete);
+        getProductsFarms(res, mysql, context, complete);
         function complete() {
             callbackCount++;
-            if (callbackCount >= 1) {
+            if (callbackCount >= 2) {
                 res.render(handlebars_file, context);
             }
         }
@@ -77,40 +93,40 @@ module.exports = function () {
         });
     });
 
-        router.put('/:id', function (req, res) {
-            var mysql = req.app.get('mysql');
-            console.log(req.body)
-            console.log(req.params.id)
-            var sql = "UPDATE cbs_products SET product_name=?, product_description=?, product_roast=?, product_weight=?, product_price=?, product_stock=? WHERE product_id=?";
-            var inserts = [req.body.product_name, req.body.product_description, req.body.product_roast, req.body.product_weight, req.body.product_price, req.body.product_stock, req.params.id];
-            sql = mysql.pool.query(sql, inserts, function (error, results, fields) {
-                if (error) {
-                    console.log(error)
-                    res.write(JSON.stringify(error));
-                    res.end();
-                } else {
-                    res.status(200);
-                    res.end();
-                }
-            });
+    router.put('/:id', function (req, res) {
+        var mysql = req.app.get('mysql');
+        console.log(req.body)
+        console.log(req.params.id)
+        var sql = "UPDATE cbs_products SET product_name=?, product_description=?, product_roast=?, product_weight=?, product_price=?, product_stock=? WHERE product_id=?";
+        var inserts = [req.body.product_name, req.body.product_description, req.body.product_roast, req.body.product_weight, req.body.product_price, req.body.product_stock, req.params.id];
+        sql = mysql.pool.query(sql, inserts, function (error, results, fields) {
+            if (error) {
+                console.log(error)
+                res.write(JSON.stringify(error));
+                res.end();
+            } else {
+                res.status(200);
+                res.end();
+            }
         });
+    });
 
-        // to DELETE a product
-        router.delete('/:id', function (req, res) {
-            var mysql = req.app.get('mysql');
-            var sql = "DELETE FROM cbs_products WHERE product_id = ?";
-            var inserts = [req.params.id];
-            sql = mysql.pool.query(sql, inserts, function (error, results, fields) {
-                if (error) {
-                    console.log(error)
-                    res.write(JSON.stringify(error));
-                    res.status(400);
-                    res.end();
-                } else {
-                    res.status(202).end();
-                }
-            })
-        });
+    // to DELETE a product
+    router.delete('/:id', function (req, res) {
+        var mysql = req.app.get('mysql');
+        var sql = "DELETE FROM cbs_products WHERE product_id = ?";
+        var inserts = [req.params.id];
+        sql = mysql.pool.query(sql, inserts, function (error, results, fields) {
+            if (error) {
+                console.log(error)
+                res.write(JSON.stringify(error));
+                res.status(400);
+                res.end();
+            } else {
+                res.status(202).end();
+            }
+        })
+    });
 
-        return router;
-    }();
+    return router;
+}();

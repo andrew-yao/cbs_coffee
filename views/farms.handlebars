@@ -35,7 +35,7 @@
             </ul>
         </div>
     </nav>
-
+ 
     <div class="container mx-2">
         <h2 class="bd-title py-4">Our Farms</h2>
 
@@ -53,38 +53,32 @@
                     <td>{{farm_name}}</td>
                     <td>{{farm_region}}</td>
                     <td>{{farm_country}}</td>
-                    <td><button onclick="deleteFarm({{id}})">Delete</button></td>
-                    <td><a href="/farms/{{id}}">Update</a></td>
+                    <td><button onclick="deleteFarm({{id}})" class="btn btn-danger">Delete</button></td>
+                    <td><a href="/farms/{{id}}"  class="btn btn-primary">Update</a></td>
                 </tr>
                 {{/each}}
             </tbody>
         </table>
 
-        <h2 class="bd-title mt-5 py-4">Delete A Farm</h2>
-        <form action="" method="" class="form-inline">
-            <label for="">ID:</label>
-            <input type="text" class="form-control  mx-2" />
-            <button class="btn btn-primary">Delete Farm</button>
-        </form>
-
+        
         <h2 class="bd-title mt-5 py-4">Add A New Farm</h2>
-        <form action="" method="POST">
+        <form id="add-farm" action="/farms" method="POST">
             <div class="row">
                 <div class="col-md-12">
-                    <label for="">Name:</label>
-                    <input type="text" class="form-control" />
+                    <label for="farm_name">Name:</label>
+                    <input type="text" id="farm_name" name="farm_name" class="form-control" />
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <label for="">Country:</label>
-                    <input type="text" class="form-control" />
+                    <label for="farm_country">Country:</label>
+                    <input type="text" id="farm_country" name="farm_country" class="form-control" />
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <label for="">Region:</label>
-                    <input type="text" class="form-control" />
+                    <label for="farm_region">Region:</label>
+                    <input type="text" id="farm_region" name="farm_region" class="form-control" />
                 </div>
             </div>
             <br>

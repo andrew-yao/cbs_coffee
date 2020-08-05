@@ -41,6 +41,7 @@
 
         <table class="table table-bordered">
             <thead>
+                <th>Product ID</th>
                 <th>Product Name</th>
                 <th>Description</th>
                 <th>Roast</th>
@@ -51,14 +52,15 @@
             <tbody>
                 {{#each products}}
                 <tr>
+                    <td>{{id}}</td>
                     <td>{{product_name}}</td>
                     <td>{{product_description}}</td>
                     <td>{{product_roast}}</td>
                     <td>{{product_weight}}</td>
                     <td>${{product_price}}</td>
                     <td>{{product_stock}}</td>
-                    <td><button onclick="deleteProduct({{id}})">Delete</button></td>
-                    <td><a href="/products/{{id}}">Update</a></td>
+                    <td><button onclick="deleteProduct({{id}})" class="btn btn-danger">Delete</button></td>
+                    <td><a href="/products/{{id}}" class="btn btn-primary">Update</a></td>
                 </tr>
                 {{/each}}
             </tbody>
@@ -71,12 +73,11 @@
                 <th>Farm ID</th>
             </thead>
             <tbody>
-                {{#each products_and_farms}}
+                {{#each productsfarms}}
                 <tr>
                     <td>{{product_id}}</td>
                     <td>{{farm_id}}</td>
-                    <td><button onclick="deleteProduct({{id}})">Delete</button></td>
-                    <td><a href="/products/{{id}}">Update</a></td>
+                    <td><button onclick="deleteProductFarm({{id}})" class="btn btn-danger">Delete</button></td>
                 </tr>
                 {{/each}}
             </tbody>
