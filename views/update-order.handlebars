@@ -19,7 +19,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
+                <li class="nav-item ">
                     <a class="nav-link" title="Products" href="/products">Products</a>
                 </li>
                 <li class="nav-item">
@@ -28,7 +28,7 @@
                 <li class="nav-item">
                     <a class="nav-link" title="Customers" href="/customers">Customers</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a class="nav-link" title="Orders" href="/orders">Orders<span class="sr-only">(current)</span></a>
                 </li>
             </ul>
@@ -52,6 +52,12 @@
             <div class="row">
                 <div class="col-md-12">
                     <h5 class="pt-4 pb-2">Shipping Information</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="ship_date">Date Shipped:</label>
+                    <input type="date" name="ship_date" class="form-control" value="" />
                 </div>
             </div>
             <div class="row">
@@ -93,23 +99,23 @@
             <div class="row">
                 <div class="col-md-6">
                     <label for="order_subtotal">Subtotal Cost:</label>
-                    <input type="number" name="order_subtotal" class="form-control" value="{{order.order_subtotal}}"/>
+                    <input type="number" id="order_subtotal" name="order_subtotal" class="form-control" value="{{order.order_subtotal}}"/>
                 </div>
                 <div class="col-md-6">
                     <label for="order_shipcost">Shipping Cost:</label>
-                    <input type="number" name="order_shipcost" class="form-control" value="{{order.order_shipcost}}"/>
+                    <input type="number" id="order_shipcost" name="order_shipcost" class="form-control" value="{{order.order_shipcost}}"/>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
                     <label for="order_totalcost">Total Cost:</label>
-                    <input type="text" name="order_totalcost" class="form-control" value="{{order.order_totalcost}}"/>
+                    <input type="number" id="order_totalcost" name="order_totalcost" class="form-control" value="{{order.order_totalcost}}"/>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-5">
                     <label for="order_quantity">Quantity:</label>
-                    <input type="text" name="order_quantity" class="form-control" value="{{order.order_quantity}}"/>
+                    <input type="number" id="order_quantity" name="order_quantity" class="form-control" value="{{order.order_quantity}}"/>
                 </div>
             </div>
             <br>

@@ -133,8 +133,8 @@ module.exports = function(){
         var mysql = req.app.get('mysql');
         console.log(req.body)
         console.log(req.params.id)
-        var sql = "UPDATE cbs_orders SET order_date=?, ship_date=?, customer_id=?, ship_firstname=?, ship_lastname=?, ship_address=?, ship_city=?, ship_zip=?, ship_phone=? WHERE order_id=?"
-        var inserts = [req.body.order_date, req.body.ship_date, req.body.customer_id, req.body.ship_firstname, req.body.ship_lastname, req.body.ship_address, req.body.ship_city, req.body.ship_zip, req.body.ship_phone, req.params.id];
+        var sql = "UPDATE cbs_orders SET order_date=?, customer_id=?, ship_date=?, ship_firstname=?, ship_lastname=?, ship_address=?, ship_city=?, ship_zip=?, ship_phone=?, order_subtotal=?, order_shipcost=?, order_totalcost=?, order_quantity=? WHERE order_id=?"
+        var inserts = [req.body.order_date, req.body.customer_id, req.body.ship_date, req.body.ship_firstname, req.body.ship_lastname, req.body.ship_address, req.body.ship_city, req.body.ship_zip, req.body.ship_phone, req.body.order_subtotal, req.body.order_shipcost, req.body.order_totalcost, req.body.order_quantity, req.params.id];
         sql = mysql.pool.query(sql, inserts, function (error, results, fields) {
             if (error) {
                 console.log(error)
