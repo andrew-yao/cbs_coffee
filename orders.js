@@ -45,11 +45,11 @@ module.exports = function(){
     }
 
 
-
+    // All orders:
     router.get('/', function(req, res){
         var callbackCount = 0;
         var context = {};
-        context.jsscripts = ["deleteOrder.js"];
+        context.jsscripts = ["deleteOrder.js", "addOrderDetail.js", "deleteOrderDetail.js"];
         var mysql = req.app.get('mysql');
         var handlebars_file = 'orders'
         getOrders(res, mysql, context, complete);
@@ -78,6 +78,23 @@ module.exports = function(){
         }
     });
 
+    // orderdetails
+    router.get('/orderdetails', function (req, res) {
+        var callbackCount = 0;
+        var context = {};
+        context.jsscripts = ["addOrderDetail.js", "deleteOrderDetail.js"];
+        var mysql = req.app.get('mysql');
+        var handlebars_file = 'orders';
+        getOrders(res, mysql, context, complete);
+        getOrderDetails(res, mysql, context, complete);
+        function complete() {
+            callbackCount++;
+            if (callbackCount >= 2) {
+                res.render(handlebars_file, context);
+            }
+        }
+    });
+
     // to INSERT an order:
     router.post('/', function (req, res) {
         var mysql = req.app.get('mysql');
@@ -94,6 +111,22 @@ module.exports = function(){
         });
     });
 
+
+    // to INSERT into Order Details
+    router.post('/orderdetails', function (req, res) {
+        var mysql = req.app.get('mysql');
+        var sql = "INSERT INTO cbs_orderdetails (order_id, product_id, product_quantity) VALUES (?,?,?)";
+        var inserts = [req.body.order_id, req.body.product_id, req.body.product_quantity];
+        sql = mysql.pool.query(sql, inserts, function (error, results, fields) {
+            if (error) {
+                console.log(JSON.stringify(error))
+                res.write(JSON.stringify(error));
+                res.end();
+            } else {
+                res.redirect('/orders');
+            }
+        });
+    });
 
     // To update an order:
     router.put('/:id', function (req, res) {
@@ -130,7 +163,28 @@ module.exports = function(){
                 res.status(202).end();
             }
         })
-    })
+    });
+
+
+    // to DELETE from Order Details
+    router.delete('/orderdetails/:order_id/:product_id', function (req, res) {
+        console.log(req.params.order_id);
+        
+        var mysql = req.app.get('mysql');
+        var sql = "DELETE FROM cbs_orderdetails WHERE (order_id = ? AND product_id = ?)";
+        var inserts = [req.params.order_id, req.params.product_id];
+        sql = mysql.pool.query(sql, inserts, function (error, results, fields) {
+            if (error) {
+                console.log(error)
+                res.write(JSON.stringify(error));
+                res.status(400);
+                res.end();
+            } else {
+                res.status(202).end();
+            }
+        })
+    });
+
 
     return router;
 }();

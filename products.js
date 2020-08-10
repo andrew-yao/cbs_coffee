@@ -163,9 +163,11 @@ module.exports = function () {
     });
 
     // to DELETE from cbs_products_farms
-    router.delete('/productsfarms/:product_id:farm_id', function (req, res) {
+    router.delete('/productsfarms/:product_id/:farm_id', function (req, res) {
+        console.log(req.params.product_id);
+
         var mysql = req.app.get('mysql');
-        var sql = "DELETE FROM cbs_products_farms WHERE product_id = ? AND farm_id = ?";
+        var sql = "DELETE FROM cbs_products_farms WHERE (product_id = ? AND farm_id = ?)";
         var inserts = [req.params.product_id, req.params.farm_id];
         sql = mysql.pool.query(sql, inserts, function (error, results, fields) {
             if (error) {

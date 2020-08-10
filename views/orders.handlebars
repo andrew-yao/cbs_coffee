@@ -85,19 +85,22 @@
         <h2 class="bd-title py-4">Order Details</h2>
 
         <table class="table table-bordered">
-            <tr>
-                <th>Order ID</th>
-                <th>Product ID</th>
-                <th>Product Quantity</th>
-            </tr>
-            {{#each orderdetails}}
-            <tr>
-                <td>{{order_id}}</td>
-                <td>{{product_id}}</td>
-                <td>{{product_quantity}}</td>
-            </tr>
-            {{/each}}
-
+            <thead>
+                    <th>Order ID</th>
+                    <th>Product ID</th>
+                    <th>Product Quantity</th>
+                
+            </thead>
+            <tbody>
+                {{#each orderdetails}}
+                    <tr>
+                        <td>{{order_id}}</td>
+                        <td>{{product_id}}</td>
+                        <td>{{product_quantity}}</td>
+                        <td><button onclick="deleteOrderDetail({{order_id}}, {{product_id}})" class="btn btn-danger">Delete</button></td>
+                    </tr>
+                {{/each}}
+            </tbody>
         </table>
 
 
@@ -185,26 +188,26 @@
 
 
         <h2 class="bd-title mt-5 py-4">Add A Product To An Order</h2>
-        <form action="" method="">
+        <form id="addOrderDetail" action="/orders/orderdetails" method="POST">
             <div class="row">
                 <div class="col-md-12">
-                    <label for="">Order ID:</label>
-                    <input type="" class="form-control" />
+                    <label for="order_id">Order ID:</label>
+                    <input type="number" name="order_id" class="form-control" />
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <label for="">Product ID:</label>
-                    <input type="" class="form-control" />
+                    <label for="product_id">Product ID:</label>
+                    <input type="number" name="product_id" class="form-control" />
                 </div>
                 <div class="col-md-6">
-                    <label for="">Product Quantity:</label>
-                    <input type="" class="form-control" />
+                    <label for="product_quantity">Product Quantity:</label>
+                    <input type="number" name="product_quantity" class="form-control" />
                 </div>
             </div>
             <br>
             <div class="text-center">
-                <button type="submit" class="btn btn-primary btn-lg">Add Product To Order</button>
+                <button onclick="addOrderDetail({{order_id}}, {{product_id}})" class="btn btn-primary btn-lg">Add Product To Order</button>
             </div>
         </form>
 

@@ -1,6 +1,6 @@
-function deleteProductFarm(product_id, farm_id){
+function deleteOrderDetail(order_id, product_id){
     $.ajax({
-        url: `/products/productsfarms/${product_id}/${farm_id}`,
+        url: `/orders/orderdetails/${order_id}/${product_id}`,
         type: 'DELETE',
         success: function(result){
             window.location.reload(true);
