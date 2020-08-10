@@ -27,7 +27,6 @@ module.exports = function () {
             complete();
         });
     }
-    
 
 
     // gets one specific product to update it
@@ -48,7 +47,7 @@ module.exports = function () {
     router.get('/', function (req, res) {
         var callbackCount = 0;
         var context = {};
-        context.jsscripts = ["deleteProduct.js"];
+        context.jsscripts = ["deleteProduct.js", "deleteProductFarm.js", "addProductFarm.js"];
         var mysql = req.app.get('mysql');
         var handlebars_file = 'products';
         getProducts(res, mysql, context, complete);
@@ -73,7 +72,24 @@ module.exports = function () {
             if (callbackCount >= 1) {
                 res.render('update-product', context);
             }
+        }
+    });
 
+
+    // products farms
+    router.get('/productsfarms', function (req, res) {
+        var callbackCount = 0;
+        var context = {};
+        context.jsscripts = ["addProductFarm.js", "deleteProductFarm.js"];
+        var mysql = req.app.get('mysql');
+        var handlebars_file = 'products';
+        getProducts(res, mysql, context, complete);
+        getProductsFarms(res, mysql, context, complete);
+        function complete() {
+            callbackCount++;
+            if (callbackCount >= 2) {
+                res.render(handlebars_file, context);
+            }
         }
     });
 
@@ -93,6 +109,24 @@ module.exports = function () {
         });
     });
 
+    // to INSERT into cbs_products_farms
+    router.post('/productsfarms', function (req, res) {
+        var mysql = req.app.get('mysql');
+        var sql = "INSERT INTO cbs_products_farms (product_id, farm_id) VALUES (?,?)";
+        var inserts = [req.body.product_id, req.body.farm_id];
+        sql = mysql.pool.query(sql, inserts, function (error, results, fields) {
+            if (error) {
+                console.log(JSON.stringify(error))
+                res.write(JSON.stringify(error));
+                res.end();
+            } else {
+                res.redirect('/products');
+            }
+        });
+    });
+    
+
+    // To Update Product:
     router.put('/:id', function (req, res) {
         var mysql = req.app.get('mysql');
         console.log(req.body)
@@ -127,6 +161,25 @@ module.exports = function () {
             }
         })
     });
+
+    // to DELETE from cbs_products_farms
+    router.delete('/productsfarms/:product_id:farm_id', function (req, res) {
+        var mysql = req.app.get('mysql');
+        var sql = "DELETE FROM cbs_products_farms WHERE product_id = ? AND farm_id = ?";
+        var inserts = [req.params.product_id, req.params.farm_id];
+        sql = mysql.pool.query(sql, inserts, function (error, results, fields) {
+            if (error) {
+                console.log(error)
+                res.write(JSON.stringify(error));
+                res.status(400);
+                res.end();
+            } else {
+                res.status(202).end();
+            }
+        })
+    });
+
+
 
     return router;
 }();

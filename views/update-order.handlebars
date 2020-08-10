@@ -41,17 +41,14 @@
             <div class="row">
                 <div class="col-md-6">
                     <label for="order_date">Order Date:</label>
-                    <input type="date" name="order_date" class="form-control" value="{{order.order_date}}" />
-                </div>
-                <div class="col-md-6">
-                    <label for="ship_date">Ship Date:</label>
-                    <input type="date" name="ship_date" class="form-control" />
+                    <input type="date" name="order_date" class="form-control" value="{{order.order_date}}"/>
                 </div>
                 <div class="col-md-6">
                     <label for="customer_id">Customer ID:</label>
-                    <input type="number" name="customer_id" class="form-control" value="{{order.customer_id}}" />
+                    <input type="number" name="customer_id" class="form-control" value="{{order.customer_id}}"/>
                 </div>
             </div>
+
             <div class="row">
                 <div class="col-md-12">
                     <h5 class="pt-4 pb-2">Shipping Information</h5>
@@ -64,10 +61,9 @@
                 </div>
                 <div class="col-md-6">
                     <label for="ship_lastname">Last Name:</label>
-                    <input type="text" name="ship_lastname" class="form-control" value="{{order.ship_lastname}}" />
+                    <input type="text" name="ship_lastname" class="form-control" value="{{order.ship_lastname}}"/>
                 </div>
             </div>
-
             <div class="row">
                 <div class="col-md-12">
                     <label for="ship_address">Address:</label>
@@ -77,21 +73,48 @@
             <div class="row">
                 <div class="col-md-5">
                     <label for="ship_city">City:</label>
-                    <input type="text" id="ship_city" name="ship_city" class="form-control"
-                        value="{{order.ship_city}}" />
+                    <input type="text" name="ship_city" class="form-control" value="{{order.ship_city}}"/>
                 </div>
                 <div class="col-md-3">
                     <label for="ship_zip">ZIP:</label>
-                    <input type="text" id="ship_zip" name="ship_zip" class="form-control" value="{{order.ship_zip}}" />
+                    <input type="text" name="ship_zip" class="form-control" value="{{order.ship_zip}}"/>
                 </div>
                 <div class="col-md-4">
                     <label for="ship_phone">Phone:</label>
-                    <input type="text" name="ship_phone" class="form-control" value="{{order.ship_phone}}" />
+                    <input type="text" name="ship_phone" class="form-control" value="{{order.ship_phone}}"/>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <h5 class="pt-4 pb-2">Order Information</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="order_subtotal">Subtotal Cost:</label>
+                    <input type="number" name="order_subtotal" class="form-control" value="{{order.order_subtotal}}"/>
+                </div>
+                <div class="col-md-6">
+                    <label for="order_shipcost">Shipping Cost:</label>
+                    <input type="number" name="order_shipcost" class="form-control" value="{{order.order_shipcost}}"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <label for="order_totalcost">Total Cost:</label>
+                    <input type="text" name="order_totalcost" class="form-control" value="{{order.order_totalcost}}"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <label for="order_quantity">Quantity:</label>
+                    <input type="text" name="order_quantity" class="form-control" value="{{order.order_quantity}}"/>
                 </div>
             </div>
             <br>
             <div class="text-center">
-                <button onclick="updateOrder({{order.id}})" class="btn btn-primary btn-lg">Update</button>
+                <button onclick="updateOrder({{order.id}})" class="btn btn-primary btn-lg">Update Order</button>
             </div>
         </form>
 
