@@ -87,7 +87,8 @@
         <table class="table table-bordered">
             <thead>
                     <th>Order ID</th>
-                    <th>Product ID</th>
+                    <th class="d-none">Product ID</th>
+                    <th>Product Name</th>
                     <th>Product Quantity</th>
                 
             </thead>
@@ -95,7 +96,8 @@
                 {{#each orderdetails}}
                     <tr>
                         <td>{{order_id}}</td>
-                        <td>{{product_id}}</td>
+                        <td class="d-none">{{product_id}}</td>
+                        <td>{{product_name}}</td>
                         <td>{{product_quantity}}</td>
                         <td><button onclick="deleteOrderDetail({{order_id}}, {{product_id}})" class="btn btn-danger">Delete</button></td>
                     </tr>
@@ -190,17 +192,23 @@
         <h2 class="bd-title mt-5 py-4">Add A Product To An Order</h2>
         <form id="addOrderDetail" action="/orders/orderdetails" method="POST">
             <div class="row">
-                <div class="col-md-12">
-                    <label for="order_id">Order ID:</label>
-                    <input type="number" name="order_id" class="form-control" />
+                <div class="col-md-4">
+                    <label for="order_id">Order:</label>
+                    <select name="order_id" id="order_id" class="form-control selectpicker">
+                        {{#each orders}}
+                        <option>{{id}}</option>
+                        {{/each}}
+                    </select>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <label for="product_id">Product ID:</label>
-                    <input type="number" name="product_id" class="form-control" />
+                <div class="col-md-4">
+                    <label for="product_id">Product:</label>
+                    <select name="product_id" id="product_id" class="form-control selectpicker">
+                        {{#each products}}
+                        <option>{{product_id}}: {{product_name}}</option>
+                        {{/each}}
+                    </select>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <label for="product_quantity">Product Quantity:</label>
                     <input type="number" name="product_quantity" class="form-control" />
                 </div>

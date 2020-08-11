@@ -30,20 +30,39 @@ module.exports = function(){
         });
     }
 
+    /* get Product IDs and Names to populate in OrderDetails dropdown */
+    function getProducts(res, mysql, context, complete){
+        sql = "SELECT product_id, product_name FROM cbs_products";
+        mysql.pool.query(sql, function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end()
+            }
+            context.products = results
+            complete();
+        });
+    }
 
+    
     // Show all existing entries in Order Details table:
     function getOrderDetails(res, mysql, context, complete) {
-        var sql = "SELECT order_id, product_id, product_quantity FROM cbs_orderdetails";
+        var sql =   `SELECT o.order_id, od.product_id, p.product_name AS product_name, od.product_quantity FROM cbs_products p
+                    INNER JOIN cbs_orderdetails od
+                    ON p.product_id = od.product_id
+                    INNER JOIN cbs_orders o 
+                    ON o.order_id = od.order_id`;
         mysql.pool.query(sql, function (error, results, fields) {
             if (error) {
                 res.write(JSON.stringify(error));
                 res.end()
             }
-            context.orderdetails = results
+            context.orderdetails = results;
             complete();
         });
     }
 
+
+    
 
     // All orders:
     router.get('/', function(req, res){
@@ -54,9 +73,10 @@ module.exports = function(){
         var handlebars_file = 'orders'
         getOrders(res, mysql, context, complete);
         getOrderDetails(res, mysql, context, complete);
+        getProducts(res, mysql, context, complete);
         function complete(){
             callbackCount++;
-            if(callbackCount >= 2){
+            if(callbackCount >= 3){
                 res.render(handlebars_file, context);
             }
         }
@@ -126,7 +146,7 @@ module.exports = function(){
                 res.redirect('/orders');
             }
         });
-    });
+    }); 
 
     // To update an order:
     router.put('/:id', function (req, res) {
