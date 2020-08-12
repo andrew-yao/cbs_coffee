@@ -4,13 +4,26 @@ module.exports = function () {
 
     // Show all existing products
     function getProducts(res, mysql, context, complete) {
-        sql = "SELECT product_id AS id, product_name, product_description, product_roast, product_weight, product_price, product_stock FROM cbs_products"
+        sql = "SELECT product_id AS id, product_name, product_description, product_roast, product_weight, product_price, product_stock FROM cbs_products";
         mysql.pool.query(sql, function (error, results, fields) {
             if (error) {
                 res.write(JSON.stringify(error));
                 res.end()
             }
             context.products = results
+            complete();
+        });
+    }
+
+    // Show all existing farms
+    function getFarms(res, mysql, context, complete) {
+        var sql = "SELECT farm_id, farm_name, farm_region, farm_country FROM cbs_farms";
+        mysql.pool.query(sql, function (error, results, fields) {
+            if (error) {
+                res.write(JSON.stringify(error));
+                res.end()
+            }
+            context.farms = results
             complete();
         });
     }
@@ -43,6 +56,18 @@ module.exports = function () {
         });
     }
 
+    function getFarmsWithProducts(res, mysql, context, complete) {
+        sql = "SELECT cbs_products.product_id, cbs_products.product_name, cbs_products.product_roast, cbs_farms.farm_id, cbs_farms.farm_name, cbs_farms.farm_country FROM cbs_products JOIN cbs_products_farms ON cbs_products.product_id = cbs_products_farms.product_id LEFT OUTER JOIN cbs_farms on cbs_products_farms.farm_id = cbs_farms.farm_id";
+        mysql.pool.query(sql, function (error, results, fields) {
+            if (error) {
+                res.write(JSON.stringify(error));
+                res.end()
+            }
+            context.farms_with_products = results
+            complete();
+        });
+    }
+
     // display all the products
     router.get('/', function (req, res) {
         var callbackCount = 0;
@@ -52,9 +77,11 @@ module.exports = function () {
         var handlebars_file = 'products';
         getProducts(res, mysql, context, complete);
         getProductsFarms(res, mysql, context, complete);
+        getFarms(res, mysql, context, complete);
+        getFarmsWithProducts(res, mysql, context, complete);
         function complete() {
             callbackCount++;
-            if (callbackCount >= 2) {
+            if (callbackCount >= 4) {
                 res.render(handlebars_file, context);
             }
         }
@@ -85,9 +112,10 @@ module.exports = function () {
         var handlebars_file = 'products';
         getProducts(res, mysql, context, complete);
         getProductsFarms(res, mysql, context, complete);
+        getFarms(res, mysql, context, complete);
         function complete() {
             callbackCount++;
-            if (callbackCount >= 2) {
+            if (callbackCount >= 3) {
                 res.render(handlebars_file, context);
             }
         }
@@ -109,7 +137,7 @@ module.exports = function () {
         });
     });
 
-    // to INSERT into cbs_products_farms
+    // to INSERT into products_farms
     router.post('/productsfarms', function (req, res) {
         var mysql = req.app.get('mysql');
         var sql = "INSERT INTO cbs_products_farms (product_id, farm_id) VALUES (?,?)";
@@ -124,7 +152,7 @@ module.exports = function () {
             }
         });
     });
-    
+
 
     // To Update Product:
     router.put('/:id', function (req, res) {
@@ -162,9 +190,9 @@ module.exports = function () {
         })
     });
 
-    // to DELETE from cbs_products_farms
+    // to DELETE from products_farms
     router.delete('/productsfarms/:product_id/:farm_id', function (req, res) {
-        console.log(req.params.product_id);
+        console.log(req.params.product_id, req.params.farm_id);
 
         var mysql = req.app.get('mysql');
         var sql = "DELETE FROM cbs_products_farms WHERE (product_id = ? AND farm_id = ?)";

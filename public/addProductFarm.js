@@ -1,4 +1,4 @@
-function addProductFarm(product_id, farm_id){
+function addProductFarm(id, farm_id){
     $.ajax({
         url: '/products/productsfarms',
         type: 'POST',

@@ -70,14 +70,23 @@
         <table class="table table-bordered">
             <thead>
                 <th>Product ID</th>
+                <th>Product Name</th>
+                <th>Product Roast</th>
                 <th>Farm ID</th>
+                <th>Farm Name</th>
+                <th>Farm Country</th>
             </thead>
             <tbody>
-                {{#each productsfarms}}
+                {{#each farms_with_products}}
                 <tr>
                     <td>{{product_id}}</td>
+                    <td>{{product_name}}</td>
+                    <td>{{product_roast}}</td>
                     <td>{{farm_id}}</td>
-                    <td><button onclick="deleteProductFarm({{product_id}}, {{farm_id}})" class="btn btn-danger">Delete</button></td>
+                    <td>{{farm_name}}</td>
+                    <td>{{farm_country}}</td>
+                    <td><button onclick="deleteProductFarm({{product_id}}, {{farm_id}})"
+                            class="btn btn-danger">Delete</button></td>
                 </tr>
                 {{/each}}
             </tbody>
@@ -131,17 +140,26 @@
         <form id="addProductFarm" action="/products/productsfarms" method="POST">
             <div class="row">
                 <div class="col-md-6">
-                    <label for="product_id">Product ID:</label>
-                    <input type="number" name="product_id" class="form-control" />
+                    <label> Products </label>
+                    <select id='product_id' name="product_id" class="form-control selectpicker">
+                        {{#each products}}
+                        <option value="{{id}}">{{product_name}}</option>
+                        {{/each}}
+                    </select>
                 </div>
                 <div class="col-md-6">
-                    <label for="farm_id">Farm ID:</label>
-                    <input type="number" name="farm_id" class="form-control" />
+                    <label> Farms </label>
+                    <select id='farm_id' name="farm_id" class="form-control selectpicker">
+                        {{#each farms}}
+                        <option value="{{farm_id}}">{{farm_name}}</option>
+                        {{/each}}
+                    </select>
                 </div>
-            </div> 
+            </div>
             <br>
             <div class="text-center">
-                <button onclick="addProductFarm({{product_id}}, {{farm_id}})" class="btn btn-primary btn-lg">Add Farm To Product</button>
+                <button onclick="addProductFarm({{product_id}}, {{farm_id}})" class="btn btn-primary btn-lg">Add Farm To
+                    Product</button>
             </div>
         </form>
 
