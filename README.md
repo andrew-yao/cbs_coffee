@@ -4,7 +4,7 @@
 
 A database admin site for managing CBS products, farms, customers, and orders.
 
-### Authors: 
+## Authors
 * [Jordan Pemberton](https://github.com/jordanpemberton)
 * [Andrew Yao](https://github.com/andrew-yao)
 
