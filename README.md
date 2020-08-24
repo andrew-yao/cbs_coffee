@@ -1,13 +1,12 @@
 # CBS: Coffee Bean Supply
 
-#### Authors: 
-* [Jordan Pemberton](https://github.com/jordanpemberton)
-* [Andrew Yao](https://github.com/andrew-yao)
-
 ### OSU CS-340 Databases Term Project
 
 A database admin site for managing CBS products, farms, customers, and orders.
 
+### Authors: 
+* [Jordan Pemberton](https://github.com/jordanpemberton)
+* [Andrew Yao](https://github.com/andrew-yao)
 
 
 ## Technology stack
