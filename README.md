@@ -16,7 +16,6 @@ Frontend:
 * CSS
 * Javascript
 * Bootstrap 4
-* Chart.js
 
 Backend:
 * NodeJS
