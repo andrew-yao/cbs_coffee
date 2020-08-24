@@ -27,7 +27,7 @@ Backend:
 
 ### Home Page
 
-![Screenshot of Home Page](https://github.com/jordanpemberton/cbs_coffee/blob/master/cbs_documentation/CBSHomePage.png)
+![Screenshot of Home Page](https://github.com/jordanpemberton/cbs_coffee/blob/master/cbs_documentation/CBSHomePage.jpg)
 
 ### Products Page
 
